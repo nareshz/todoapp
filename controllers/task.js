@@ -1,6 +1,7 @@
+var startOfDay = require('date-fns/startOfDay');
+var endOfDay = require('date-fns/endOfDay');
 var db = require('./../settings/main_db');
 var task = require('./../models/Task')(db);
-
 taskCount = 0;
 
 module.exports = {
@@ -15,8 +16,12 @@ module.exports = {
 
     getTaskByDate: async function (req, res) {
         try {
+            const date = new Date(req.body.date);
             const tasks = await task.find({ //query today up to tonight
-                date: req.body.date,
+                date: { 
+                    $gt: startOfDay(date),
+                    $lt: endOfDay(date)
+                },
             });
             res.json(tasks);
         } catch (error) {
