@@ -12,13 +12,17 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const mongoose_1 = require("@nestjs/mongoose");
 const tasks_module_1 = require("./tasks/tasks.module");
+const auth_module_1 = require("./auth/auth.module");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot(),
             tasks_module_1.TasksModule,
-            mongoose_1.MongooseModule.forRoot(`mongodb://nareshz:hThpXdFmzKqPBROP@ac-usohh8h-shard-00-00.edxhl1z.mongodb.net:27017,ac-usohh8h-shard-00-01.edxhl1z.mongodb.net:27017,ac-usohh8h-shard-00-02.edxhl1z.mongodb.net:27017/todoapp?ssl=true&replicaSet=atlas-1346dg-shard-0&authSource=admin&retryWrites=true&w=majority`)
+            mongoose_1.MongooseModule.forRoot(`mongodb://nareshz:hThpXdFmzKqPBROP@ac-usohh8h-shard-00-00.edxhl1z.mongodb.net:27017,ac-usohh8h-shard-00-01.edxhl1z.mongodb.net:27017,ac-usohh8h-shard-00-02.edxhl1z.mongodb.net:27017/todoapp?ssl=true&replicaSet=atlas-1346dg-shard-0&authSource=admin&retryWrites=true&w=majority`),
+            auth_module_1.AuthModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
